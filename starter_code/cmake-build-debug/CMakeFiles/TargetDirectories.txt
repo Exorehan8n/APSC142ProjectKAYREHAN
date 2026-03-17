@@ -1,0 +1,4 @@
+/Users/rehanjuhan/Downloads/starter_code/cmake-build-debug/CMakeFiles/project.dir
+/Users/rehanjuhan/Downloads/starter_code/cmake-build-debug/CMakeFiles/tests.dir
+/Users/rehanjuhan/Downloads/starter_code/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/rehanjuhan/Downloads/starter_code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
