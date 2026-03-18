@@ -61,7 +61,16 @@ int move_character(int * y, int * x, char direction, char character) {
 
 int charge_minotaur(int *y, int *x, int player_y, int player_x, char charge_direction) {
     // call move_character twice or until a wall is hit
+    int newx;
+    int newy;
+    move_character(y, x, charge_direction, MINOTAUR);
+    move_character(y, x, charge_direction, MINOTAUR);
     // when the wall is hit, move the Minotaur into the wall in the direction it is charging
+    if (map[*y*width+*x] == WALL) {
+        map[*y*width+*x] = MINOTAUR;
+    }
     // calculate the new coordinates
+    newx = *x;
+    newy = *y;
     return MOVED_OKAY;
 }
