@@ -12,21 +12,68 @@ extern int width;
 
 char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
     // check to see if the Minotaur has caught the player
-    if (player_x==minotaur_x&&player_y==minotaur_y) {
+    if (player_x==minotaur_x && player_y == minotaur_y) {
         return CAUGHT_PLAYER;
 
     }
     // check if neither the x nor y coordinate is the same as the player
-    if (player_x!=minotaur_x|| player_y!=minotaur_y) {
+
+    if (player_x != minotaur_x && player_y != minotaur_y) {
         return SEES_NOTHING;
     }
     // if there's a wall in between, they can't see
-    if (player_x==minotaur_x) {
-        for (int i=0; i<abs(player_x-minotaur_x); i++){
-            if (map[minotaur_y*width+i]==
+    if (minotaur_y == player_y) {
+
+        if (minotaur_x > player_x) {
+            for (int i = player_x; i < minotaur_x; i++) {
+                if (map[minotaur_y * width + i] == WALL) {
+                    return SEES_NOTHING;
+                }
+            }
+        } else if (minotaur_x < player_x) {
+            for (int i = minotaur_x; i < player_x; i++) {
+                if (map[minotaur_y * width + i] == WALL) {
+                    return SEES_NOTHING;
+                }
+            }
         }
+
     }
+
+    if (minotaur_x == player_x) {
+
+        if (minotaur_y > player_y) {
+            for (int i = player_y; i < minotaur_y; i++) {
+                if (map[i * width + minotaur_x] == WALL) {
+                    return SEES_NOTHING;
+                }
+            }
+        } else if (minotaur_y < player_y) {
+            for (int i = minotaur_y; i < player_y; i++) {
+                if (map[i * width + minotaur_y] == WALL) {
+                    return SEES_NOTHING;
+                }
+            }
+        }
+
+
+
+
+
+    }
+
     // if one of them is the same, check if the path in between is clear
+
+    if (minotaur_y > player_y) {
+        return UP;
+    } else if (minotaur_y < player_y) {
+        return DOWN;
+    } else if (minotaur_x > player_x) {
+        return LEFT;
+    } else if (minotaur_x < player_x) {
+        return RIGHT;
+    }
+
     return SEES_NOTHING;
 }
 
@@ -52,8 +99,8 @@ int move_character(int * y, int * x, char direction, char character) {
     }
     // check if the new coordinates point to a wall
             //printf("%c ",map[i*width+j]);
-    printf("%d, %d", newy, newx);
-    printf("%c", map[newy*width+newx]);
+    //printf("%d, %d", newy, newx);
+    //printf("%c", map[newy*width+newx]);
     if (map[newy*width+newx] == WALL) {
         return MOVED_WALL;
         //printf("Moved wall");
@@ -61,7 +108,12 @@ int move_character(int * y, int * x, char direction, char character) {
 
     // at this point, the move is known to be valid (OK direction and not a wall)
     // remove character from the old position and replace with EMPTY
-    map[*x*width+*y] = EMPTY;
+
+    //if (MOVED_OKAY) {
+
+        map[(*y*width+*x)] = EMPTY;
+    //}
+
 
     // set character in the new position in map
     map[(newy)*width+(newx)] = character;
@@ -71,18 +123,23 @@ int move_character(int * y, int * x, char direction, char character) {
     return MOVED_OKAY;
 }
 
+
 int charge_minotaur(int *y, int *x, int player_y, int player_x, char charge_direction) {
+
     // call move_character twice or until a wall is hit
-    int newx;
-    int newy;
-    move_character(y, x, charge_direction, MINOTAUR);
-    move_character(y, x, charge_direction, MINOTAUR);
+    int newx = *x;
+    int newy = *y;
+
+        move_character(y, x, charge_direction, MINOTAUR);
+        move_character(y, x, charge_direction, MINOTAUR);
+        return MOVED_OKAY;
     // when the wall is hit, move the Minotaur into the wall in the direction it is charging
-    if (map[*y*width+*x] == WALL) {
-        map[*y*width+*x] = MINOTAUR;
-    }
+
+    //map[*y*width+*x] = MINOTAUR;
+
     // calculate the new coordinates
     newx = *x;
     newy = *y;
     return MOVED_OKAY;
+
 }
