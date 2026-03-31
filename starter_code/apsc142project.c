@@ -16,7 +16,9 @@
 #include "game.h"
 #include "character.h"
 
+
 void update_minotaur(int player_y, int player_x, int *minotaur_y, int *minotaur_x, char *charge_direction);
+char *load_map(char *filename, int *map_height, int *map_width);
 
 // These global variables must be used to store map information.
 // Almost every function needs these variables, so keeping them as globals helps keep things organized.
@@ -75,10 +77,12 @@ int main(void) {
     char charge_direction = SEES_NOTHING;
 
     // Set the width and height for the hardcoded map
-    width = HARDCODED_WIDTH;
-    height = HARDCODED_HEIGHT;
+    width = 8;
+    height = 8;
+
     // Use the hardcoded map by setting the global map variable equal to it
-    map = hardcoded_map;
+    //map = hardcoded_map;
+    map = load_map("/Users/rehanjuhan/Downloads/starter_code/map2.txt", &height, &width);
 
     // Eventually, the player position should be determined from the map, however, hardcode it for now
     int player_y = 5;
@@ -93,8 +97,10 @@ int main(void) {
     char input = 0;
     while (input != EOF && input != 4) {
         // Print the map
+        printf("\n");
         print_map();
-
+        char seeplayerfunc = sees_player(player_y, player_x, minotaur_y, minotaur_x);
+        printf("%c\n", seeplayerfunc);
         // Get a character - blocks until one is input
         input = getch();
 
