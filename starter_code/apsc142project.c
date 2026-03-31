@@ -1,5 +1,5 @@
 // APSC 142 Engineering Programming Project Starter Code
-// Copyright Sean Kauffman 2024
+// Copyright Sean Kauffman 2026
 
 // Don't forget to update your project configuration to select "Emulate terminal in the output console"
 
