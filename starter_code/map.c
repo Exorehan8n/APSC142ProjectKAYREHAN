@@ -38,9 +38,7 @@ static void printc(char c) {
 }
 
 void print_map(void) {
-    // Print the map given in the global map variable
 
-    //printf(map);
 
 
     for (int i = 0; i < height; i++) {
@@ -54,55 +52,7 @@ void print_map(void) {
         printf("\n");
 
     }
-    /*
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+11]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+22]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+33]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+44]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+55]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+66]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+77]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+88]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+99]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+110]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+120]);
-    }
-*/
+
 
 }
 
@@ -115,13 +65,6 @@ int locate_character(char character, int* character_y, int* character_x) {
 
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            //printf("%c ",map[i*width+j]);
-            /*
-            if (strcmp(map, "P") == 1) {
-
-            }
-            */
-
             if (j < width-1) {
                 printf(" ");
             }
@@ -129,19 +72,59 @@ int locate_character(char character, int* character_y, int* character_x) {
                 *character_x = i;
                 *character_y = j;
                 return FOUND_CHARACTER;
-
             }
-
         }
         printf("\n");
-
     }
-
-    // if they were present
-
 }
 
 
 char *load_map(char *filename, int *map_height, int *map_width) {
-    return NULL;
+    FILE *map = fopen(filename, "r");
+    char *oneD = malloc( (*map_width) *(*map_height) * sizeof(char));
+
+    int width = 0;
+    char temp;
+    int height = 0;
+    int countwidth = 1;
+    char read_char = 'c';
+
+    while (!feof(map)) {
+        fscanf(map, "%c", &temp);
+        printf("%c", temp);
+        /*
+        if (temp == WALL && countwidth) {
+            width += 1;
+        }
+
+        if (temp == '\n') {
+            height += 1;
+            countwidth = 0;
+        }
+        */
+
+    }
+
+    /*
+    fclose(map);
+    map = fopen("/Users/rehanjuhan/Downloads/starter_code/map2.txt", "r");
+*/
+    *map_width = width ;
+    *map_height = height;
+
+     for (int i = 0; i < (*map_height); i++) {
+         for (int j = 0; j < (*map_width); j++) {
+             fscanf(map, "%c", &oneD[i*(*map_width)+j]);
+
+             read_char = getc(map);
+
+             oneD[i*(*map_width)+j] = read_char;
+             if (getc(map) != '\n') {
+                 getc(map);
+            }
+         }
+     }
+
+    fclose(map);
+    //return oneD;
 }
