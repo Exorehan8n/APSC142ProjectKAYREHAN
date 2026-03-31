@@ -1,5 +1,5 @@
 // APSC 142 Engineering Programming Project Starter Code
-// Copyright Sean Kauffman 2024
+// Copyright Sean Kauffman 2026
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,7 +7,6 @@
 #include "defines.h"
 #include "colours.h"
 #include "map.h"
-#include "string.h"
 
 #define BUFFER_SIZE 10
 
@@ -39,71 +38,7 @@ static void printc(char c) {
 
 void print_map(void) {
     // Print the map given in the global map variable
-
-    //printf(map);
-
-
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            printf("%c ",map[i*width+j]);
-            if (j < width-1) {
-                printf(" ");
-            }
-
-        }
-        printf("\n");
-
-    }
-    /*
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+11]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+22]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+33]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+44]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+55]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+66]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+77]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+88]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+99]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+110]);
-    }
-    printf("%c\n");
-    for (int i = 0; i < width; i++) {
-        printf("%c ",map[i+120]);
-    }
-*/
-
+    printc('P');
 }
 
 void print_revealed_map(int player_y, int player_x) {
@@ -112,33 +47,8 @@ void print_revealed_map(int player_y, int player_x) {
 
 int locate_character(char character, int* character_y, int* character_x) {
     // Attempt to find the character in the map and return a status code indicating
-
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            //printf("%c ",map[i*width+j]);
-            /*
-            if (strcmp(map, "P") == 1) {
-
-            }
-            */
-
-            if (j < width-1) {
-                printf(" ");
-            }
-            if (map[i*width+j] ==  character) {
-                *character_x = i;
-                *character_y = j;
-                return FOUND_CHARACTER;
-
-            }
-
-        }
-        printf("\n");
-
-    }
-
     // if they were present
-
+    return FOUND_CHARACTER;
 }
 
 
